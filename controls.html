@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="./salesbot-controls.js"></script>
+  <script src="./sdk.js"></script>
+<title>Page Title</title>
+<style>
+  body {
+    font-family: "PT Sans";
+    margin: 0;
+    overflow-x: hidden;
+  }
+
+  .logo {
+    margin-bottom: 13px;
+  }
+
+  .logo img {
+    margin-top: 15px;
+    margin-left: 15px;
+    width: 123px;
+  }
+
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: #EFEFEF;
+  }
+
+  .title, .control {
+    font-size: 15px;
+
+    color: #313942;
+  }
+
+  .title {
+    opacity: 0.5;
+  }
+
+  .control {
+  }
+
+  .block {
+    display: flex;
+    padding: 12px;
+    padding-bottom: 11px;
+  }
+
+  .title-block {
+    width: 156px;
+    display: flex;
+    justify-content: flex-end;
+    flex-shrink: 0;
+  }
+
+  .control-block {
+    margin-left: 32px;
+  }
+
+  .control {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display: block;
+  }
+
+</style>
+</head>
+<body>
+  <div id="wrapper">
+    <div class="block">
+      <div class="title-block">
+        <div class="title">Выберите поле:</div>
+      </div>
+      <div class="control-block">
+        <div class="control" id="acc_control"></div>
+      </div>
+    </div>
+    <div id="select"></div>
+    <div id="input"></div>
+    <div id="textarea"></div>
+  </div>
+  <script>
+    const wrapper = document.getElementById('wrapper');
+
+    new Controls(wrapper);
+
+    const controls = {};
+
+    window.AMO_SDK.subscribe().ready(() => {
+      console.warn("INIT DOMA");
+
+      window.AMO_SDK.getFields().then((data) => {
+        console.warn('get fields data', data);
+        const accControl = document.getElementById('acc_control');
+
+        controls.select = new InlineSelect(accControl, {
+          items: [{ id: 'test', option: '...' }].concat(data.map(f => ({ id: f.id, option: f.title }))),
+          name: 'test',
+        });
+      }, console.error);
+
+      window.AMO_SDK.setInputValues({
+        test: 'value1',
+        value2: 'test2',
+      });
+
+      window.AMO_SDK.subscribe().fields((data) => {
+        console.warn('fields changed', data);
+        controls.select.update({ items: [{ id: 'test', option: '...' }].concat(data.map(f => ({ id: f.id, option: f.title }))) });
+      });
+
+      window.AMO_SDK.subscribe().statuses((data) => {
+        console.warn('statuses changed', data);
+      });
+
+      window.AMO_SDK.getStatuses().then((data) => {
+        console.warn('get statuses data', data);
+      }, console.error);
+    });
+
+    // const mentions = document.getElementById('mentions');
+
+    // const mention = new FieldMention(mentions, {
+      // items: [{ id: 'test', option: '...' }, { id: 'nana', option: 'first option' }],
+      // // name: 'test',
+    // });
+
+    // const select = document.getElementById('select');
+    // const textarea = document.getElementById('textarea');
+    // const input = document.getElementById('input');
+
+    // new Input(input, {});
+    // new Select(select, {
+      // items: [{ id: 'test', option: '...' }, { id: 'nana', option: 'first option' }],
+      // name: 'test',
+    // });
+    // new Textarea(textarea, {});
+
+  </script>
+</body>
+</html>
+
