@@ -83,7 +83,7 @@
     const wrapper = document.getElementById('wrapper');
 
     console.warn('wrapper', wrapper);
-    wrapper.style.background = 'red';
+    wrapper.style.background = 'blue';
 
     new Controls(wrapper);
 
@@ -91,6 +91,7 @@
 
     const amo = window.Amo();
 
+    amo.on('ready', () => {
       console.log('ON READY');
 
       amo.on('update:sb-fields', (data) => {
@@ -125,9 +126,10 @@
       });
 
       setTimeout(() => {
-      console.warn('AAAAAAAAAAAAAaa')
-      amo.off('update:sb-statuses', sss);
-    }, 3000)
+        console.warn('AAAAAAAAAAAAAaa')
+        amo.off('update:sb-statuses', sss);
+      }, 3000)
+    });
 
     
 
