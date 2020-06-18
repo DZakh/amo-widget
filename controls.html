@@ -86,10 +86,12 @@
 
     const controls = {};
 
-    window.AMO_SDK.subscribe().ready(() => {
+    const amo = window.Amo();
+
+    amo.on('ready', () => {
       console.warn("INIT DOMA");
 
-      window.AMO_SDK.getFields().then((data) => {
+      amo.getFields().then((data) => {
         console.warn('get fields data', data);
         const accControl = document.getElementById('acc_control');
 
@@ -99,24 +101,24 @@
         });
       }, console.error);
 
-      window.AMO_SDK.setInputValues({
-        test: 'value1',
-        value2: 'test2',
-      });
+      // amo.setInputValues({
+      //   test: 'value1',
+      //   value2: 'test2',
+      // }); 
 
-      window.AMO_SDK.subscribe().fields((data) => {
+      amo.on('update:sb-fields', (data) => {
         console.warn('fields changed', data);
         controls.select.update({ items: [{ id: 'test', option: '...' }].concat(data.map(f => ({ id: f.id, option: f.title }))) });
       });
 
-      window.AMO_SDK.subscribe().statuses((data) => {
+      amo.on('update:sb-statuses', (data) => {
         console.warn('statuses changed', data);
       });
 
-      window.AMO_SDK.getStatuses().then((data) => {
+      amo.getStatuses().then((data) => {
         console.warn('get statuses data', data);
       }, console.error);
-    });
+    })
 
     // const mentions = document.getElementById('mentions');
 
