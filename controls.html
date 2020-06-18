@@ -100,9 +100,11 @@
         controls.select.update({ items: [{ id: 'test', option: '...' }].concat(data.map(f => ({ id: f.id, option: f.title }))) });
       });
 
-      amo.on('update:sb-statuses', (data) => {
+      const sss = (data) => {
         console.log('ON STATUESES', data);
-      });
+      };
+
+      amo.on('update:sb-statuses', sss);
 
       amo.on('destroy', () => {
         console.log('ON DESTROY');
@@ -120,9 +122,14 @@
       });
 
       amo.request('sb-statuses').then((data) => {
-        console.warn('REQUEST fields', data);
+        console.warn('REQUEST statuses', data);
       });
     })
+
+    setTimeout(() => {
+      console.warn('AAAAAAAAAAAAAaa')
+      amo.off('update:sb-statuses', sss);
+    }, 60000)
 
     // const mentions = document.getElementById('mentions');
 
