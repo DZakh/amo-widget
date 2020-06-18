@@ -91,7 +91,6 @@
 
     const amo = window.Amo();
 
-    amo.on('ready', () => {
       console.log('ON READY');
 
       amo.on('update:sb-fields', (data) => {
@@ -129,7 +128,6 @@
       console.warn('AAAAAAAAAAAAAaa')
       amo.off('update:sb-statuses', sss);
     }, 3000)
-    })
 
     
 
