@@ -83,7 +83,7 @@
     const wrapper = document.getElementById('wrapper');
 
     console.warn('wrapper', wrapper);
-    wrapper.style.background = 'red';
+    wrapper.style.background = 'green';
 
     new Controls(wrapper);
 
@@ -97,7 +97,7 @@
       amo.on('update:sb-fields', (data) => {
         console.log('ON FIELDS', data);
         
-        controls.select.update({ items: [{ id: 'test', option: '...' }].concat(data.map(f => ({ id: f.id, option: f.title }))) });
+        // controls.select.update({ items: [{ id: 'test', option: '...' }].concat(data.map(f => ({ id: f.id, option: f.title }))) });
       });
 
       const sss = (data) => {
@@ -124,12 +124,14 @@
       amo.request('sb-statuses').then((data) => {
         console.warn('REQUEST statuses', data);
       });
-    })
 
-    setTimeout(() => {
+      setTimeout(() => {
       console.warn('AAAAAAAAAAAAAaa')
       amo.off('update:sb-statuses', sss);
-    }, 30000)
+    }, 3000)
+    })
+
+    
 
     // const mentions = document.getElementById('mentions');
 
