@@ -83,7 +83,7 @@
     const wrapper = document.getElementById('wrapper');
 
     console.warn('wrapper', wrapper);
-    wrapper.style.background = 'green';
+    wrapper.style.background = 'blue';
 
     new Controls(wrapper);
 
@@ -92,35 +92,36 @@
     const amo = window.Amo();
 
     amo.on('ready', () => {
-      console.warn("INIT DOMA");
+      console.log('ON READY');
 
-      amo.getFields().then((data) => {
-        console.warn('get fields data', data);
+      amo.on('update:sb-fields', (data) => {
+        console.log('ON FIELDS', data);
+        
+        controls.select.update({ items: [{ id: 'test', option: '...' }].concat(data.map(f => ({ id: f.id, option: f.title }))) });
+      });
+
+      amo.on('update:sb-statuses', (data) => {
+        console.log('ON STATUESES', data);
+      });
+
+      amo.on('destroy', () => {
+        console.log('ON DESTROY');
+      });
+
+      amo.request('sb-fields').then((data) => {
+        console.warn('REQUEST fields', data);
+
         const accControl = document.getElementById('acc_control');
 
         controls.select = new InlineSelect(accControl, {
           items: [{ id: 'test', option: '...' }].concat(data.map(f => ({ id: f.id, option: f.title }))),
           name: 'test',
         });
-      }, console.error);
-
-      // amo.setInputValues({
-      //   test: 'value1',
-      //   value2: 'test2',
-      // }); 
-
-      amo.on('update:sb-fields', (data) => {
-        console.warn('fields changed', data);
-        controls.select.update({ items: [{ id: 'test', option: '...' }].concat(data.map(f => ({ id: f.id, option: f.title }))) });
       });
 
-      amo.on('update:sb-statuses', (data) => {
-        console.warn('statuses changed', data);
+      amo.request('sb-statuses').then((data) => {
+        console.warn('REQUEST fields', data);
       });
-
-      amo.getStatuses().then((data) => {
-        console.warn('get statuses data', data);
-      }, console.error);
     })
 
     // const mentions = document.getElementById('mentions');
