@@ -96,6 +96,10 @@
 
       amo.on('update:sb-fields', (data) => {
         console.log('ON FIELDS', data);
+
+        amo.request('sb-fields').then((data) => {
+        console.warn('REQUEST fields', data);
+      });
         
         // controls.select.update({ items: [{ id: 'test', option: '...' }].concat(data.map(f => ({ id: f.id, option: f.title }))) });
       });
