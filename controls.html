@@ -82,6 +82,9 @@
   <script>
     const wrapper = document.getElementById('wrapper');
 
+    console.warn('wrapper', wrapper);
+    wrapper.style.background = 'red';
+
     new Controls(wrapper);
 
     const controls = {};
