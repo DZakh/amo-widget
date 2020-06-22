@@ -80,7 +80,7 @@
   </div>
   <script>
     const wrapper = document.getElementById('wrapper');
-    wrapper.style.background = 'green';
+    wrapper.style.background = 'RED';
 
     const amo = window.AmoSDK();
 
@@ -105,19 +105,15 @@
 
       amo.on('update:rpa-statuses', sss);
 
-      amo.on('destroy', () => {
-        console.log('ON DESTROY');
-      });
-
       amo.request('rpa-fields').then((data) => {
         console.warn('REQUEST fields', data);
 
         const accControl = document.getElementById('acc_control');
 
-        controls.select = new InlineSelect(accControl, {
-          items: [{ id: 'test', option: '...' }].concat(data.map(f => ({ id: f.id, option: f.title }))),
-          name: 'test',
-        });
+        // controls.select = new InlineSelect(accControl, {
+        //   items: [{ id: 'test', option: '...' }].concat(data.map(f => ({ id: f.id, option: f.title }))),
+        //   name: 'test',
+        // });
       });
 
       amo.request('rpa-statuses').then((data) => {
