@@ -80,11 +80,12 @@
   </div>
   <script>
     const wrapper = document.getElementById('wrapper');
-    wrapper.style.background = 'green';
+    wrapper.style.background = 'red';
 
     const amo = window.AmoSDK();
 
     const elements = amo.elements();
+    
   //   'inline-select'
   // 'field-mention'
   // textarea
@@ -94,19 +95,19 @@
     const inlineSelect = elements.create('inline-select', {
       items: [{ id: '', option: 'sss' }, { id: '23', option: 's23ss' }, { id: '21', option: 'sss121' }],
       name: 'sss',
+      onChange: console.warn,
     });
 
-    console.log(inlineSelect.isMounted)
+    const parenElement = inlineSelect.mount('#select')
 
-    inlineSelect.unmount()
+    setTimeout(() => {
+      console.log('update')
+      inlineSelect.update({ items: [{ id: 'sdf', option: '111' }, { id: '211', option: '333' }, { id: '211221', option: '444' }] })
 
-    console.log(inlineSelect.isMounted)
-
-    inlineSelect.mount('#select')
-
-    inlineSelect.mount('#select')
-
-    console.log(inlineSelect.isMounted)
+      if (!inlineSelect.isMounted) {
+        inlineSelect.unmount();
+      }
+    }, 8000)
 
 
 
