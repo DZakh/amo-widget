@@ -80,7 +80,7 @@
   </div>
   <script>
     const wrapper = document.getElementById('wrapper');
-    wrapper.style.background = 'yellow';
+    wrapper.style.background = 'green';
 
     const amo = window.AmoSDK();
 
@@ -96,34 +96,46 @@
       name: 'sss',
     });
 
+    console.log(inlineSelect.isMounted)
+
+    inlineSelect.unmount()
+
+    console.log(inlineSelect.isMounted)
+
     inlineSelect.mount('#select')
 
-      console.log('ON READY');
+    inlineSelect.mount('#select')
 
-      amo.on('update:rpa-fields', (data) => {
-        console.log('ON FIELDS', data);
+    console.log(inlineSelect.isMounted)
 
-        amo.request('rpa-fields').then((data) => {
-          console.warn('REQUEST fields', data);
-        });
+
+
+      // console.log('ON READY');
+
+      // amo.on('update:rpa-fields', (data) => {
+      //   console.log('ON FIELDS', data);
+
+      //   amo.request('rpa-fields').then((data) => {
+      //     console.warn('REQUEST fields', data);
+      //   });
         
-        // controls.select.update({ items: [{ id: 'test', option: '...' }].concat(data.map(f => ({ id: f.id, option: f.title }))) });
-      });
+      //   // controls.select.update({ items: [{ id: 'test', option: '...' }].concat(data.map(f => ({ id: f.id, option: f.title }))) });
+      // });
 
-      const sss = (data) => {
-        console.log('ON STATUESES', data);
-      };
+      // const sss = (data) => {
+      //   console.log('ON STATUESES', data);
+      // };
 
-      amo.on('update:rpa-statuses', sss);
+      // amo.on('update:rpa-statuses', sss);
 
-      amo.request('rpa-statuses').then((data) => {
-        console.warn('REQUEST statuses', data);
-      });
+      // amo.request('rpa-statuses').then((data) => {
+      //   console.warn('REQUEST statuses', data);
+      // });
 
 
-      amo.setInputValues({
-        test: 'test'
-      })
+      // amo.setInputValues({
+      //   test: 'test'
+      // })
 
     
 
