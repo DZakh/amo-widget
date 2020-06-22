@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <script src="./salesbot-controls.js"></script>
-  <script src="./sdk.js"></script>
+  <script src="https://amo-tm.github.io/wip-host/sdk.js"></script>
 <title>Page Title</title>
 <style>
   body {
@@ -81,23 +80,19 @@
   </div>
   <script>
     const wrapper = document.getElementById('wrapper');
+    wrapper.style.background = 'green';
 
-    console.warn('wrapper', wrapper);
-    wrapper.style.background = 'blue';
+    const amo = window.AmoSDK();
 
-    new Controls(wrapper);
-
-    const controls = {};
-
-    const amo = window.Amo();
+    console.warn(amo);
 
     amo.on('ready', () => {
       console.log('ON READY');
 
-      amo.on('update:sb-fields', (data) => {
+      amo.on('update:rpa-fields', (data) => {
         console.log('ON FIELDS', data);
 
-        amo.request('sb-fields').then((data) => {
+        amo.request('rpa-fields').then((data) => {
         console.warn('REQUEST fields', data);
       });
         
@@ -108,13 +103,13 @@
         console.log('ON STATUESES', data);
       };
 
-      amo.on('update:sb-statuses', sss);
+      amo.on('update:rpa-statuses', sss);
 
       amo.on('destroy', () => {
         console.log('ON DESTROY');
       });
 
-      amo.request('sb-fields').then((data) => {
+      amo.request('rpa-fields').then((data) => {
         console.warn('REQUEST fields', data);
 
         const accControl = document.getElementById('acc_control');
@@ -125,13 +120,13 @@
         });
       });
 
-      amo.request('sb-statuses').then((data) => {
+      amo.request('rpa-statuses').then((data) => {
         console.warn('REQUEST statuses', data);
       });
 
       setTimeout(() => {
         console.warn('AAAAAAAAAAAAAaa')
-        amo.off('update:sb-statuses', sss);
+        amo.off('update:rpa-statuses', sss);
         amo.setInputValues({
           test: 'test'
         })
