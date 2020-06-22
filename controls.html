@@ -98,7 +98,6 @@
 
     inlineSelect.mount('#select')
 
-    amo.on('ready', () => {
       console.log('ON READY');
 
       amo.on('update:rpa-fields', (data) => {
@@ -125,12 +124,6 @@
       amo.setInputValues({
         test: 'test'
       })
-    });
-
-    console.warn('outer')
-    amo.setInputValues({
-      test2: 'test2'
-    })
 
     
 
