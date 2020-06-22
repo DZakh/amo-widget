@@ -80,11 +80,23 @@
   </div>
   <script>
     const wrapper = document.getElementById('wrapper');
-    wrapper.style.background = 'RED';
+    wrapper.style.background = 'yellow';
 
     const amo = window.AmoSDK();
 
-    console.warn(amo);
+    const elements = amo.elements();
+  //   'inline-select'
+  // 'field-mention'
+  // textarea
+  // input
+  // select
+
+    const inlineSelect = elements.create('inline-select', {
+      items: [{ id: '', option: 'sss' }, { id: '23', option: 's23ss' }, { id: '21', option: 'sss121' }],
+      name: 'sss',
+    });
+
+    inlineSelect.mount('#select')
 
     amo.on('ready', () => {
       console.log('ON READY');
@@ -120,14 +132,14 @@
         console.warn('REQUEST statuses', data);
       });
 
-      setTimeout(() => {
-        console.warn('AAAAAAAAAAAAAaa')
-        amo.off('update:rpa-statuses', sss);
-        amo.setInputValues({
-          test: 'test'
-        })
-      }, 3000)
+      amo.setInputValues({
+        test: 'test'
+      })
     });
+
+    amo.setInputValues({
+      test2: 'test2'
+    })
 
     
 
