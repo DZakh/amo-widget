@@ -80,7 +80,7 @@
   </div>
   <script>
     const wrapper = document.getElementById('wrapper');
-    wrapper.style.background = 'yellow';
+    wrapper.style.background = 'green';
 
     const amo = window.AmoSDK();
 
@@ -105,8 +105,8 @@
         console.log('ON FIELDS', data);
 
         amo.request('rpa-fields').then((data) => {
-        console.warn('REQUEST fields', data);
-      });
+          console.warn('REQUEST fields', data);
+        });
         
         // controls.select.update({ items: [{ id: 'test', option: '...' }].concat(data.map(f => ({ id: f.id, option: f.title }))) });
       });
@@ -117,26 +117,17 @@
 
       amo.on('update:rpa-statuses', sss);
 
-      amo.request('rpa-fields').then((data) => {
-        console.warn('REQUEST fields', data);
-
-        const accControl = document.getElementById('acc_control');
-
-        // controls.select = new InlineSelect(accControl, {
-        //   items: [{ id: 'test', option: '...' }].concat(data.map(f => ({ id: f.id, option: f.title }))),
-        //   name: 'test',
-        // });
-      });
-
       amo.request('rpa-statuses').then((data) => {
         console.warn('REQUEST statuses', data);
       });
+
 
       amo.setInputValues({
         test: 'test'
       })
     });
 
+    console.warn('outer')
     amo.setInputValues({
       test2: 'test2'
     })
