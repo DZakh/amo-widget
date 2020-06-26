@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <script src="./sdk.js"></script>
+  <!-- <script src="https://js.amo.tm/v1/sdk.js"></script> -->
+  <script src="sdk.js"></script>
 <title>Page Title</title>
 <style>
   body {
@@ -39,6 +40,13 @@
   .control {
   }
 
+  .select {
+    margin: 30px;
+    margin-top: 80px;
+    padding: 20px;
+    background: pink;
+  }
+
   .block {
     display: flex;
     padding: 12px;
@@ -74,7 +82,10 @@
         <div class="control" id="acc_control"></div>
       </div>
     </div>
-    <div id="select"></div>
+    <div class="select" id="select"></div>
+    <div class="select" id="select1"></div>
+    <div class="select" id="select2"></div>
+    <div class="select" id="select3"></div>
     <div id="input"></div>
     <div id="textarea"></div>
   </div>
@@ -83,8 +94,6 @@
     wrapper.style.background = 'red';
 
     const amo = window.AmoSDK();
-
-    const elements = amo.elements();
     
   //   'inline-select'
   // 'field-mention'
@@ -92,22 +101,50 @@
   // input
   // select
 
-    const inlineSelect = elements.create('inline-select', {
-      items: [{ id: '', option: 'sss' }, { id: '23', option: 's23ss' }, { id: '21', option: 'sss121' }],
+    const element = amo.elements();
+
+    const inlineSelect = element.create('inline-select', {
+      items: [{ id: '131', option: 'sss' }, { id: '11', option: 's23ss' }, { id: '21', option: 'sss121' }, { id: '131', option: 'sss' }, { id: '11', option: 's23ss' }, { id: '21', option: 'sss121' }],
       name: 'sss',
+      value: '11',
+      onChange: console.warn,
+    });
+    const inlineSelect1 = element.create('inline-select', {
+      items: [{ id: '131', option: 'sss' }, { id: '11', option: 's23ss' }, { id: '21', option: 'sss121' }, { id: '131', option: 'sss' }, { id: '11', option: 's23ss' }, { id: '21', option: 'sss121' }],
+      name: 'sss',
+      value: '11',
+      onChange: console.warn,
+    });
+    const inlineSelect2 = element.create('inline-select', {
+      items: [{ id: '131', option: 'sss' }, { id: '11', option: 's23ss' }, { id: '21', option: 'sss121' }, { id: '131', option: 'sss' }, { id: '11', option: 's23ss' }, { id: '21', option: 'sss121' }],
+      name: 'sss',
+      value: '11',
+      onChange: console.warn,
+    });
+    const inlineSelect3 = element.create('inline-select', {
+      items: [{ id: '131', option: 'sss' }, { id: '11', option: 's23ss' }, { id: '21', option: 'sss121' }, { id: '131', option: 'sss' }, { id: '11', option: 's23ss' }, { id: '21', option: 'sss121' }],
+      name: 'sss',
+      value: '11',
       onChange: console.warn,
     });
 
     const parenElement = inlineSelect.mount('#select')
+    const parenElement1 = inlineSelect1.mount('#select1')
+    const parenElement2 = inlineSelect2.mount('#select2')
+    const parenElement3 = inlineSelect3.mount('#select3')
 
-    setTimeout(() => {
-      console.log('update')
-      inlineSelect.update({ items: [{ id: 'sdf', option: '111' }, { id: '211', option: '333' }, { id: '211221', option: '444' }] })
+    // console.log(inlineSelect)
 
-      if (!inlineSelect.isMounted) {
-        inlineSelect.unmount();
-      }
-    }, 8000)
+    // setTimeout(() => {
+    //   const ooo = inlineSelect.update({
+    //     items: [{ id: 'sdf', option: '111' }, { id: '1f1', option: '333' }, { id: '11', option: '444' }]
+    //   });
+    //   console.log('update', inlineSelect.currentProps)
+
+    //   // if (!inlineSelect.isMounted) {
+    //   //   inlineSelect.unmount();
+    //   // }
+    // }, 8000)
 
 
 
@@ -116,9 +153,14 @@
       // amo.on('update:rpa-fields', (data) => {
       //   console.log('ON FIELDS', data);
 
-      //   amo.request('rpa-fields').then((data) => {
-      //     console.warn('REQUEST fields', data);
-      //   });
+        // amo.request('rpa-fields').then(({ error, data }) => {
+        //   if (error) {
+        //     console.error(error);
+        //     return;
+        //   }
+          
+        //   console.warn('REQUEST fields', data);
+        // });
         
       //   // controls.select.update({ items: [{ id: 'test', option: '...' }].concat(data.map(f => ({ id: f.id, option: f.title }))) });
       // });
@@ -161,4 +203,5 @@
   </script>
 </body>
 </html>
+
 
